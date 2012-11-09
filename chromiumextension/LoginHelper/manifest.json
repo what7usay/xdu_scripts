@@ -1,0 +1,11 @@
+{
+	"content_scripts": [ {
+		"js": ["content.js"],
+		"matches": ["http://*/xdjwWeb/systemAdmin/Login.jsp?*"],
+		"run_at": "document_idle"
+	}],
+	"manifest_version": 2,
+	"name": "sss",
+	"version": "1.1",
+	"permissions": ["cookies"]
+}
