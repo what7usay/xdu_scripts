@@ -1,4 +1,8 @@
 try{
+	//A dirty hack to call the webpage function;
+	body = document.getElementsByTagName("body")[0];
+	body.innerHTML += '<input id="whtthefck" type="button" onclick="return window.change();" display-style:none>';
+
 	form = document.getElementsByName("form1")[0];
 	uid = document.getElementsByName("uid")[0];
 	psw = document.getElementsByName("password")[0];
@@ -7,15 +11,9 @@ try{
 	uid.value = "01093033";
 	psw.value = "19900724";
 
-	//A dirty hack to call the webpage function;
-	body = document.getElementsByTagName("body")[0];
-	body.innerHTML += '<input id="whtthefck" type="button" onclick="return window.change();" display-style:none>';
-	document.getElementById("whtthefck").onclick();
 
-	//now we have the encrypted value
-	uidval = uid.value;
-	pswval = psw.value;
-	formdata = "uid=" + uidval + "&password=" + pswval + "&command=studentLogin" ;
+	document.getElementById("whtthefck").onclick();
+//	console.log(psw.value);
 
 	//post to the server
 	var xhr = new  XMLHttpRequest();
@@ -23,14 +21,14 @@ try{
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.onload = function() {
 		//where do you want to go after login
-		dest=5;
+		dest=1;
 		//1.学习主页
 		//2.理论课成绩
 		//3.公共任选课
 		//4.网上选课
 		//5.毕设选题
-//		var url="http://125.76.215.232/xdjwWeb/";
-		var url="../";
+		var url="http://125.76.215.232/xdjwWeb/";
+//		var url="../";
 		switch(dest){
 			case 1:
 				url+="main_study.jsp";
@@ -50,8 +48,14 @@ try{
 		}
 		window.location.href=url;
 	}
-	xhr.send(formdata);
 
+	//now we have the encrypted value
+	uidval = uid.value;
+	pswval = psw.value;
+//	alert(psw.value);
+	formdata = "uid=" + uidval + "&password=" + pswval + "&command=studentLogin" ;
+
+	xhr.send(formdata);
 }catch(e){
 	alert(e);
 }
